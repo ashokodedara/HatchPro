@@ -1,0 +1,60 @@
+<mvc:View controllerName="webapp.controller.Detail" xmlns:c="sap.ui.core" xmlns:t="sap.ui.table" xmlns:microchart="sap.suite.ui.microchart"
+	xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<ObjectHeader id="objectHeader" title="{MpId}" intro="{Description}"></ObjectHeader>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter1" text="Project Information" tooltip="{i18n>detailIconTabBarInfo}">
+						<content>
+							<Table id="idProductsTable">
+								<headerToolbar>
+									<Toolbar>
+										<Title text="Projects" level="H2"/>
+									</Toolbar>
+								</headerToolbar>
+								<columns>
+								
+									<Column minScreenWidth="Tablet" demandPopin="true">
+										<Text text="Status"/>
+									</Column>
+									<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+										<Text text="Budget(Actual vs Planned)"/>
+									</Column>
+									<Column hAlign="Right">
+										<Text text="Currency"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem >
+										<cells>
+											
+											<Text text="{StatusDesc}"/>
+											<microchart:DeltaMicroChart size="M" id="chart" value1="{path:'ActualData',type:'sap.ui.model.odata.type.Double'}"
+												value2="{path:'PlannedData',type:'sap.ui.model.odata.type.Double'}" displayValue1="{path:'ActualData',formatter : '.formatter.delivery'}"
+												displayValue2="{path:'PlannedData',formatter : '.formatter.delivery'}"
+												deltaDisplayValue="{ parts: [ {path: 'ActualData'}, {path: 'PlannedData'} ], formatter : '.formatter.getResult' }"
+												color="{ parts: [ {path: 'ActualData'}, {path: 'PlannedData'} ], formatter : '.formatter.getColor'}" class="sapUiSmallMargin" title1="(ActualData)" title2="(PlannedData)"/>
+											<Text text="{Currency}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter></IconTabFilter>
+				</items>
+			</IconTabBar>
+		</semantic:content>
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id="shareTile" title="{detailView>/saveAsTileTitle}"/>
+		</semantic:saveAsTileAction>
+	</semantic:DetailPage>
+</mvc:View>

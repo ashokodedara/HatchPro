@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+ <!--<html>
+	<head>
+		<title>Testing Overview</title>
+		  try to load the basic UI5 styles 
+		<link rel="stylesheet" type="text/css" href="resources/sap/ui/core/themes/sap_bluecrystal/library.css">
+		<link rel="stylesheet" type="text/css" href="webapp/CSS/style.css">
+	</head>
+	<body class="sapUiBody sapUiMediumMargin sapUiForceWidthAuto">
+		<h1>Testing Overview</h1>
+		<p>This is an overview page of various ways to test the generated app during development.<br/>Choose one of the access points below to launch the app as a standalone application, e.g. on a Tomcat server.</p>
+
+		<ul>
+			<li><a href="test/flpSandbox.html#HatchPro-display">test/flpSandbox.html</a> - start the app in the SAP Fiori launchpad sandbox (with the real backend server)</li>
+			<li><a href="test/flpSandboxMockServer.html#HatchPro-display">test/flpSandboxMockServer.html</a> - start the app in the SAP Fiori launchpad sandbox (with local mock data)</li>
+			<li><a href="test/testsuite.qunit.html">test/testsuite.qunit.html</a> - run all the tests</li>
+			<li><a href="test/unit/unitTests.qunit.html">test/unit/unitTests.qunit.html</a> - run all unit tests</li>
+			<li><a href="test/integration/opaTests.qunit.html">test/integration/opaTests.qunit.html</a> - run all integration tests</li>
+			<li>
+				<b>run this in phone emulation mode!</b>
+				<a href="test/integration/opaTestsPhone.qunit.html">test/integration/opaTestsPhone.qunit.html</a> - run all integration tests for phone
+			</li>
+		</ul>
+	</body>
+</html>-->
+
+
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta charset="UTF-8">
+		<title>Hatch Ltd-UI5 Application</title>
+		<link rel="icon" 
+      type="image/png" 
+      href="https://www.hatch.com/favicon.ico">
+      
+	<script
+			id="sap-ui-bootstrap"
+			src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+			data-sap-ui-theme="sap_belize"
+			data-sap-ui-libs="sap.m"
+			data-sap-ui-compatVersion="edge"
+			data-sap-ui-preload="async"
+			data-sap-ui-resourceroots='{"webapp":"./"}'
+			>
+		</script>
+       <link rel="stylesheet" type="text/css" href="CSS/style.css">
+
+		<script>
+			sap.ui.getCore().attachInit(function () {
+				// var oImage=new sap.m.Image({
+				//  src:"https://designmodo.com/wp-content/uploads/2015/09/webview.gif"	
+				// }).placeAt("content");
+				// oImage.setHeight("400px");
+				new sap.ui.core.ComponentContainer({
+                            name : "webapp"
+                         }).placeAt("content");
+			});
+		</script>
+	</head>
+	<body class="sapUiBody" style="zoom:125%" id="content">
+	</body>
+
+</html>

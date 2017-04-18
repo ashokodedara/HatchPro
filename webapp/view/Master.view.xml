@@ -1,0 +1,60 @@
+<mvc:View controllerName="webapp.controller.Master" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:semantic="sap.m.semantic">
+	<semantic:MasterPage id="page" title="{masterView>/title}">
+		<semantic:subHeader>
+			<Bar id="headerBar">
+				<contentMiddle>
+					<Button tooltip="View Settings" icon="sap-icon://action-settings" press="handleViewSettingsDialogButtonPressed"/>
+					<SearchField id="searchField" showRefreshButton="{= !${device>/support/touch} }" tooltip="{i18n>masterSearchTooltip}" width="90%"
+						search="onSearch"></SearchField>
+				</contentMiddle>
+			</Bar>
+		</semantic:subHeader>
+		<semantic:content>
+			<PullToRefresh id="pullToRefresh" visible="{device>/support/touch}" refresh="onRefresh"/>
+			<!-- For client side filtering add this to the items attribute:  parameters: {operationMode: 'Client'}}" -->
+			<List id="list"
+				items="{ path: '/MYPROJECTSSet', sorter: { path: 'MpId', descending: false },groupHeaderFactory: '.createGroupHeader', parameters: { operationMode: 'Client' } }"
+				busyIndicatorDelay="{masterView>/delay}" noDataText="{masterView>/noDataText}"
+				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" growing="true" growingScrollToLoad="true"
+				updateFinished="onUpdateFinished" selectionChange="onSelectionChange" >
+				<infoToolbar>
+					<Toolbar active="true" id="filterBar" visible="{masterView>/isFilterBarVisible}" press="onOpenViewSettings">
+						<Title id="filterBarLabel" text="{masterView>/filterBarLabel}"/>
+					</Toolbar>
+				</infoToolbar>
+				<items>
+					<!--<ObjectListItem id="listitems" type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" press="onSelectionChange" title="{MpId}" intro="{Description}">
+						<firstStatus>
+							<ObjectStatus  id="icon" icon="{ parts: [ {path: 'ActualData'}, {path: 'PlannedData'} ], formatter : '.formatter.getIcon'}"/>
+						</firstStatus>
+					</ObjectListItem>-->
+					<CustomListItem id="listitems">
+							<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+								<Label id="lbl1" design="Bold" text="{MpId}" />
+								<Label text="{Description}"/>
+							</VBox>
+								<core:Icon size="1rem" class="icon"
+									src="{ parts: [ {path: 'ActualData'}, {path: 'PlannedData'} ], formatter : '.formatter.getIcon'}"
+									color="{ parts: [ {path: 'ActualData'}, {path: 'PlannedData'} ], formatter : '.formatter.getIconColor'}"/>
+					</CustomListItem>
+				</items>
+			</List>
+		</semantic:content>
+		<semantic:sort>
+			<semantic:SortSelect id="sort" selectedKey="{masterView>/sortBy}" change="onSort">
+				<core:Item id="masterSort1" key="MpId" text="{i18n>masterSort1}"/>
+				<core:Item id="masterSort2" key="ActualData" text="{i18n>masterSort2}"/>
+			</semantic:SortSelect>
+		</semantic:sort>
+		<semantic:filter>
+			<semantic:FilterAction id="filter" press="onOpenViewSettings"/>
+		</semantic:filter>
+		<semantic:group>
+			<semantic:GroupSelect id="group" selectedKey="{masterView>/groupBy}" change="onGroup">
+				<core:Item id="masterGroupNone" key="None" text="{i18n>masterGroupNone}"/>
+				<core:Item id="masterGroup1" key="ActualData" text="{i18n>masterGroup1}"/>
+			</semantic:GroupSelect>
+		</semantic:group>
+	</semantic:MasterPage>
+</mvc:View>
