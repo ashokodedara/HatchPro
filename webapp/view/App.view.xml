@@ -1,0 +1,12 @@
+<mvc:View
+		controllerName="webapp.controller.App"
+		xmlns:mvc="sap.ui.core.mvc"
+		displayBlock="true"
+		busy="{appView>/busy}"
+		busyIndicatorDelay="{appView>/delay}"
+		xmlns="sap.m">
+	<Page  class="MainPage" enableScrolling="false" >
+		
+	<SplitApp id="idAppControl" />
+	</Page>
+</mvc:View>
