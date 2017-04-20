@@ -29,7 +29,7 @@ sap.ui.define([
 		 * @public
 		 */
 		onInit: function() {
-             
+
 			// Control state model
 			var oList = this.byId("list"),
 				oViewModel = this._createViewModel(),
@@ -65,8 +65,19 @@ sap.ui.define([
 			this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
 			this.getRouter().attachBypassed(this.onBypassed, this);
 		},
-	
-		
+		onSuggest: function(event) {
+			var value = event.getParameter("suggestValue");
+			var oSF = this.byId("searchField");
+			var filters = [];
+			if (value) {
+				var fil = new Filter("MpId", FilterOperator.Contains, value);
+
+				filters.push(fil);
+			}
+
+			oSF.getBinding("suggestionItems").filter(filters);
+			oSF.suggest();
+		},
 
 		/* =========================================================== */
 		/* event handlers                                              */
@@ -81,6 +92,24 @@ sap.ui.define([
 		 */
 		onUpdateFinished: function(oEvent) {
 			// update the master list object counter after new data is loaded
+			var items = this.byId("list").getItems();
+			items.forEach(function(item) {
+			 var obj = item.getBindingContext().getObject();
+			  var Actual = obj["ActualData"];
+			  var Planned = obj["PlannedData"];
+			  var fValue = Math.abs(Actual - Planned);
+			  	try {
+				if (fValue < 33000) {
+				item.$().find(".sapUiIcon").addClass("greenIcon");
+				} else if (fValue < 66000) {
+				item.$().find(".sapUiIcon").addClass("orangeIcon");
+				} else {
+				item.$().find(".sapUiIcon").addClass("redIcon");
+				}
+			} catch (err) {
+				return "black";
+			}
+			});
 			this._updateListItemCount(oEvent.getParameter("total"));
 			// hide pull to refresh if necessary
 			this.byId("pullToRefresh").hide();

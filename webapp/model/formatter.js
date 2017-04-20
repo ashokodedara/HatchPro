@@ -1,6 +1,13 @@
 sap.ui.define([], function() {
 	"use strict";
+     function currencyVal(value){
+     	var numberFormat = sap.ui.core.format.NumberFormat.getFloatInstance({
+				maxFractionDigits: 2
+			});
+			var text = "$" + numberFormat.format(value / 1000) + " K";
 
+			return text;
+}
 	return {
 		/**
 		 * Rounds the currency value to 2 digits
@@ -16,24 +23,17 @@ sap.ui.define([], function() {
 
 			return parseFloat(sValue).toFixed(2);
 		},
+		
 		delivery: function(value) {
-
-			var numberFormat = sap.ui.core.format.NumberFormat.getFloatInstance({
-				maxFractionDigits: 2
-			});
-			var text = "$" + numberFormat.format(value / 1000) + " K";
-
-			return text;
+			
+		 return currencyVal(value);
 		},
 		getResult: function(value1, value2) {
-
+            
 			var val = value1 - value2;
 			var finalval = Math.abs(val);
-			var numberFormat = sap.ui.core.format.NumberFormat.getFloatInstance({
-				maxFractionDigits: 2
-			});
-			var text = "$" + numberFormat.format(finalval / 1000) + " K";
-			return text;
+			var fval = currencyVal(finalval);
+			return fval;
 		},
 		getColor: function(value1, value2) {
 
@@ -64,21 +64,6 @@ sap.ui.define([], function() {
 				}
 			} catch (err) {
 				return "Neutral";
-			}
-		},
-		getIconColor: function(value1, value2) {
-			var val = value1 - value2;
-			var fValue = Math.abs(val);
-			try {
-				if (fValue < 33000) {
-					return "green";
-				} else if (fValue < 66000) {
-					return "orange";
-				} else {
-					return "red";
-				}
-			} catch (err) {
-				return "black";
 			}
 		}
 	};

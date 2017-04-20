@@ -12,7 +12,8 @@
     "excludedFiles": [
       "test.html"
     ],
-    "buildRequired": true
+    "buildRequired": true,
+    "lastBuildDateTime": "Thu, 20 Apr 2017 14:23:02 GMT"
   },
   "dataBinding": {
     "/webapp/view/App.view.xml": {
@@ -66,5 +67,9 @@
     "notifyBeforePushLevel": "Error",
     "blockPush": false,
     "blockPushLevel": "Error"
+  },
+  "deploy": {
+    "destination": "MyCloud",
+    "name": "ZHATCHPRO"
   }
 }

@@ -1,5 +1,9 @@
-r#__component0---detail--idProductsTable-tblHeader * {
-    font-weight: bold;
+tr#__component0---detail--idProductsTable-tblHeader * {
+    color:#2f6088;
+}
+.head
+{
+ color:red;	
 }
 
 span#__status0-__clone2-icon {
@@ -14,16 +18,23 @@ header#__page0-intHeader {
     /* border: solid; */
     /* height: 6%; */
     padding-bottom: 2%;
+    border-bottom: solid 2px #c5bfbf;
 }
 
 div#__page0-intHeader-BarPH {
- background-image: url(Hatch-Corporate-Logo.png);
+ /*background-image: url(Hatch-Corporate-Logo.png);*/
+   background-image:url('data:image/png;base64,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'); 
+    
     background-repeat: no-repeat;
     width: 100%;
     height: 44px;
     margin-top: 0.5%;
     margin-left: 40%;
    
+}
+#searchField
+{
+ color:red;	
 }
 .icon {
     margin-left: 80%;
@@ -33,4 +44,66 @@ div#__page0-intHeader-BarPH {
 
 section#__page0-cont {
     padding-top: 2%;
+}
+ul#__list2 {
+    
+    padding-right: 17%;
+}
+
+/*Icon Color*/
+.orangeIcon:before {
+  color:orange;
+}
+
+.redIcon:before {
+  color:red;
+}
+
+.greenIcon:before {
+  color:green;
+}
+
+
+
+
+
+/*Theme change */
+.sapMIBar.sapMHeader-CTX {
+   
+    background-color: #dcdada;
+   
+}
+.sapMITH {
+    box-shadow: inset 0 -0.25rem 0 -0.125rem #dcdada;
+    background-color: #dcdada;
+}
+
+.sapMITBTextOnly .sapMITBFilterDefault.sapMITBSelected>.sapMITBText {
+   color: #053b69;
+}
+.sapMLIB.sapMLIBSelected {
+    background: #dcdada;
+}
+.sapMITBContent {
+    
+    border-bottom: 0.125rem solid #dcdada;
+}
+.sapMBar {
+  
+    box-shadow: inset 0 -0.0625rem #dcdada;
+}
+.sapUiIcon:before {
+    
+    font-weight: bold;
+    
+}
+.sapMTB {
+    border-bottom-color: #427cac;
+}
+.sapMListShowSeparatorsAll .sapMLIBShowSeparator:last-child>td, .sapMListShowSeparatorsAll .sapMListTblSubRow:last-child>td {
+    border-bottom: 1px solid #427cac;
+}
+.sapMSFF {
+    border: 2px solid #bfbfbf;
+    border-radius: 5px;
 }

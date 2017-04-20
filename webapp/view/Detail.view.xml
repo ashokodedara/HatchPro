@@ -1,9 +1,13 @@
 <mvc:View controllerName="webapp.controller.Detail" xmlns:c="sap.ui.core" xmlns:t="sap.ui.table" xmlns:microchart="sap.suite.ui.microchart"
-	xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
+	xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz="sap.viz.ui5.controls" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
 	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
 		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
-			<ObjectHeader id="objectHeader" title="{MpId}" intro="{Description}"></ObjectHeader>
+			<l:Splitter height="20%">
+				<ObjectHeader id="objectHeader" title="{MpId}" intro="{Description}"></ObjectHeader>
+				<ObjectHeader id="objectHeader1" title="{MpId}" intro="{Description}"></ObjectHeader>
+				<ObjectHeader id="objectHeader2" title="{MpId}" intro="{Description}"></ObjectHeader>
+			</l:Splitter>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
 					<IconTabFilter id="iconTabBarFilter1" text="Project Information" tooltip="{i18n>detailIconTabBarInfo}">
@@ -15,33 +19,86 @@
 									</Toolbar>
 								</headerToolbar>
 								<columns>
-								
 									<Column minScreenWidth="Tablet" demandPopin="true">
-										<Text text="Status"/>
+										<Text text="Status" class="head"/>
 									</Column>
 									<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
-										<Text text="Budget(Actual vs Planned)"/>
+										<Text text="Budget(Actual vs Planned)" class="head"/>
 									</Column>
 									<Column hAlign="Right">
-										<Text text="Currency"/>
+										<Text text="Currency" class="head"/>
 									</Column>
 								</columns>
 								<items>
 									<ColumnListItem >
 										<cells>
-											
 											<Text text="{StatusDesc}"/>
 											<microchart:DeltaMicroChart size="M" id="chart" value1="{path:'ActualData',type:'sap.ui.model.odata.type.Double'}"
 												value2="{path:'PlannedData',type:'sap.ui.model.odata.type.Double'}" displayValue1="{path:'ActualData',formatter : '.formatter.delivery'}"
 												displayValue2="{path:'PlannedData',formatter : '.formatter.delivery'}"
 												deltaDisplayValue="{ parts: [ {path: 'ActualData'}, {path: 'PlannedData'} ], formatter : '.formatter.getResult' }"
-												color="{ parts: [ {path: 'ActualData'}, {path: 'PlannedData'} ], formatter : '.formatter.getColor'}" class="sapUiSmallMargin" title1="(ActualData)" title2="(PlannedData)"/>
+												color="{ parts: [ {path: 'ActualData'}, {path: 'PlannedData'} ], formatter : '.formatter.getColor'}" class="sapUiSmallMargin"
+												title1="(ActualData)" title2="(PlannedData)"/>
+												
+												
+											<viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}" height='100%' width="100%" vizType='line'>
+												<viz:dataset>
+													<viz.data:FlattenedDataset  data="{/MYPROJECTSSet}">
+														<viz.data:dimensions>
+															<viz.data:DimensionDefinition name="Week" value="{Week}"/>
+														</viz.data:dimensions>
+														<viz.data:measures>
+															<viz.data:MeasureDefinition name="Revenue" value="{ActualData}"/>
+															<viz.data:MeasureDefinition name="Cost" value="{PlannedData}"/>
+														</viz.data:measures>
+													</viz.data:FlattenedDataset>
+												</viz:dataset>
+												<viz:feeds>
+													<viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure" values="Revenue"/>
+													<viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension" values="Week"/>
+												</viz:feeds>
+											</viz:VizFrame>
+											
+											
+											
 											<Text text="{Currency}"/>
 										</cells>
 									</ColumnListItem>
 								</items>
 							</Table>
 						</content>
+					</IconTabFilter>
+					<IconTabFilter></IconTabFilter>
+				</items>
+			</IconTabBar>
+			<IconTabBar id="iconTabBar2" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter2" text="Fees" tooltip="{i18n>detailIconTabBarInfo}">
+						<content></content>
+					</IconTabFilter>
+					<IconTabFilter></IconTabFilter>
+				</items>
+			</IconTabBar>
+			<IconTabBar id="iconTabBar3" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter3" text="Cost" tooltip="{i18n>detailIconTabBarInfo}">
+						<content></content>
+					</IconTabFilter>
+					<IconTabFilter></IconTabFilter>
+				</items>
+			</IconTabBar>
+			<IconTabBar id="iconTabBar4" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter4" text="Qantities" tooltip="{i18n>detailIconTabBarInfo}">
+						<content></content>
+					</IconTabFilter>
+					<IconTabFilter></IconTabFilter>
+				</items>
+			</IconTabBar>
+			<IconTabBar id="iconTabBar5" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter5" text="KPI" tooltip="{i18n>detailIconTabBarInfo}">
+						<content></content>
 					</IconTabFilter>
 					<IconTabFilter></IconTabFilter>
 				</items>
